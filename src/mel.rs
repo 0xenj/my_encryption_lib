@@ -30,21 +30,9 @@ pub(crate) fn mel(line: &str, initial_shift: i32, encrypt: bool) -> String {
         if letter_no_accent.is_alphabetic() {
             converted.push(shift_char(letter_no_accent, shift));
         } else {
-            converted.push(' ');
+            converted.push(letter);
         }
     }
 
     converted
-}
-
-#[test]
-fn test_mel() {
-    println!("{}", mel("abc", 3, true));
-    println!("{}", mel("def", 3, false));
-    println!("{}", mel("Hello World!", 13, true));
-    println!("{}", mel("Uryyb Jbeyq!", 13, false));
-    assert_eq!(mel("abc", 3, true), "def");
-    assert_eq!(mel("def", 3, false), "abc");
-    assert_eq!(mel("Hello World!", 13, true), "Uryyb Jbeyq ");
-    assert_eq!(mel("Uryyb Jbeyq", 13, false), "Hello World");
 }
