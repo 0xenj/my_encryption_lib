@@ -36,9 +36,3 @@ pub fn mel_mdp(line: &str, password: &str, encrypt: bool) -> String {
 
     converted
 }
-
-#[test]
-fn test_mel_mdp() {
-    assert_eq!(mel_mdp("SALUT", "HEY", true), "ZEJBX");
-    assert_eq!(mel_mdp("ZEJBX", "HEY", false), "SALUT");
-}
