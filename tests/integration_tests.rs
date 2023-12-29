@@ -20,28 +20,34 @@ mod integration_tests {
 
     #[test]
     fn test_mel_3() {
-        assert_eq!(mel_presets::mel_3("abc", true), "cde");
-        assert_eq!(mel_presets::mel_3("cde", false), "abc");
-        assert_eq!(mel_presets::mel_3("à mangé forêt !? ë", true), "c ocpig hqtgv !? g");
-        assert_eq!(mel_presets::mel_3("c ocpig hqtgv !? g", false), "a mange foret !? e");
+        assert_eq!(mel_presets::mel_3("abc", true), "def");
+        assert_eq!(mel_presets::mel_3("def", false), "abc");
+        assert_eq!(mel_presets::mel_3("à mangé forêt !? ë", true), "d pdqjh iruhw !? h");
+        assert_eq!(mel_presets::mel_3("d pdqjh iruhw !? h", false), "a mange foret !? e");
     }
 
     #[test]
     fn test_mel_4() {
-        assert_eq!(mel_presets::mel_4("abc", true), "def");
-        assert_eq!(mel_presets::mel_4("def", false), "abc");
+        assert_eq!(mel_presets::mel_4("abc", true), "efg");
+        assert_eq!(mel_presets::mel_4("efg", false), "abc");
+        assert_eq!(mel_presets::mel_4("à mangé forêt !? ë", true), "e qerki jsvix !? i");
+        assert_eq!(mel_presets::mel_4("e qerki jsvix !? i", false), "a mange foret !? e");
     }
 
     #[test]
     fn test_mel_5() {
-        assert_eq!(mel_presets::mel_5("abc", true), "def");
-        assert_eq!(mel_presets::mel_5("def", false), "abc");
+        assert_eq!(mel_presets::mel_5("abc", true), "fgh");
+        assert_eq!(mel_presets::mel_5("fgh", false), "abc");
+        assert_eq!(mel_presets::mel_5("à mangé forêt !? ë", true), "f rfslj ktwjy !? j");
+        assert_eq!(mel_presets::mel_5("f rfslj ktwjy !? j", false), "a mange foret !? e");
     }
 
     #[test]
     fn test_mel_6() {
-        assert_eq!(mel_presets::mel_6("abc", true), "def");
-        assert_eq!(mel_presets::mel_6("def", false), "abc");
+        assert_eq!(mel_presets::mel_6("abc", true), "ghi");
+        assert_eq!(mel_presets::mel_6("ghi", false), "abc");
+        assert_eq!(mel_presets::mel_6("à mangé forêt !? ë", true), "g sgtmk luxkz !? k");
+        assert_eq!(mel_presets::mel_6("g sgtmk luxkz !? k", false), "a mange foret !? e");
     }
 
     #[test]
