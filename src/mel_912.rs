@@ -1,3 +1,5 @@
+use crate::utils::replace_accented_char;
+
 fn shift_char(letter: char, shift: i32) -> char {
     let (start, end) = if letter.is_uppercase() { ('A', 'Z') } else { ('a', 'z') };
     let first_ascii = start as i32;
@@ -29,21 +31,22 @@ pub fn mel_912(line: &str, encrypt: bool) -> String {
     let mut shift = if encrypt { 9 } else { -9 };
   
     for letter in line.chars() {
-      if letter.is_alphabetic() {
-        converted.push(shift_char(letter, shift));
-        shift = update_shift(shift, encrypt);
+      let letter_no_accent = replace_accented_char(letter);
+      if letter_no_accent.is_alphabetic() {
+          converted.push(shift_char(letter_no_accent, shift));
+          shift = update_shift(shift, encrypt);
       } else {
-        converted.push(letter);
+          converted.push(' ');
       }
-    }
+  }
   
     converted
   }
 
   #[test]
   fn it_converts() {
-    let input = "Hello World".to_string();
+    let input = "Héllo World!".to_string();
     let converted = "Qmsrt Arcvm".to_string();
-    assert!(mel_912(&input, true) == "Qmsrt Arcvm");
+    assert!(mel_912(&input, true) == "Qmsrt Arcvm ");
     assert!(mel_912(&converted, false) == "Hello World");
   }
