@@ -1,3 +1,5 @@
+use crate::utils::replace_accented_char;
+
 fn shift_char(letter: char, shift: i32) -> char {
     let (start, end) = if letter.is_uppercase() { ('A' as u8, 'Z' as u8) } else { ('a' as u8, 'z' as u8) };
     
@@ -19,19 +21,30 @@ fn shift_char(letter: char, shift: i32) -> char {
     }
 }
 
-pub(crate) fn mel(line: &str, shift: i32) -> String {
+pub(crate) fn mel(line: &str, initial_shift: i32, encrypt: bool) -> String {
     let mut converted = String::new();
+    let shift = if encrypt { initial_shift } else { -initial_shift };
 
     for letter in line.chars() {
-        converted.push(shift_char(letter, shift));
+        let letter_no_accent = replace_accented_char(letter);
+        if letter_no_accent.is_alphabetic() {
+            converted.push(shift_char(letter_no_accent, shift));
+        } else {
+            converted.push(' ');
+        }
     }
 
     converted
 }
 
 #[test]
-fn test_rotate() {
-    assert_eq!(mel("abc", 3), "def");
-    assert_eq!(mel("xyz", 3), "abc");
-    assert_eq!(mel("Hello World!", 13), "Uryyb Jbeyq!");
+fn test_mel() {
+    println!("{}", mel("abc", 3, true));
+    println!("{}", mel("def", 3, false));
+    println!("{}", mel("Hello World!", 13, true));
+    println!("{}", mel("Uryyb Jbeyq!", 13, false));
+    assert_eq!(mel("abc", 3, true), "def");
+    assert_eq!(mel("def", 3, false), "abc");
+    assert_eq!(mel("Hello World!", 13, true), "Uryyb Jbeyq ");
+    assert_eq!(mel("Uryyb Jbeyq", 13, false), "Hello World");
 }
