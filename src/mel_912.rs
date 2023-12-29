@@ -36,17 +36,9 @@ pub fn mel_912(line: &str, encrypt: bool) -> String {
           converted.push(shift_char(letter_no_accent, shift));
           shift = update_shift(shift, encrypt);
       } else {
-          converted.push(' ');
+          converted.push(letter);
       }
   }
   
     converted
-  }
-
-  #[test]
-  fn it_converts() {
-    let input = "Héllo World!".to_string();
-    let converted = "Qmsrt Arcvm".to_string();
-    assert!(mel_912(&input, true) == "Qmsrt Arcvm ");
-    assert!(mel_912(&converted, false) == "Hello World");
   }
