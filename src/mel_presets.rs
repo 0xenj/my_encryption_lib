@@ -1,8 +1,21 @@
+// Import the `mel` function from the `mel` module.
 use super::mel::mel;
 
+/// Encrypts or decrypts the given line using a shift of 1.
+/// 
+/// # Arguments
+/// * `line` - The string to be encrypted or decrypted.
+/// * `encrypt` - A boolean flag to specify encryption (true) or decryption (false).
+/// 
+/// # Returns
+/// Returns a `Result` with either the encrypted/decrypted string or an error.
 pub fn mel_1(line: &str, encrypt: bool) -> Result<String, &'static str> {
     mel(line, 1, encrypt)
 }
+
+// The following functions `mel_2` to `mel_25` are similar to `mel_1`, but
+// they use different shift values from 2 to 25, respectively.
+// Each function encrypts or decrypts the input string with a specific shift value.
 
 pub fn mel_2(line: &str, encrypt: bool) -> Result<String, &'static str> {
     mel(line, 2, encrypt)
