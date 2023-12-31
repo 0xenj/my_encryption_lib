@@ -17,7 +17,15 @@ fn char_to_shift(letter: char) -> i32 {
     (letter as u8 - base) as i32
 }
 
-pub fn mel_mdp(line: &str, password: &str, encrypt: bool) -> String {
+pub fn mel_mdp(line: &str, password: &str, encrypt: bool) -> Result<String, &'static str> {
+    if line.is_empty() {
+        return Err("Text must not be empty");
+    }
+
+    if password.is_empty() || password.chars().any(|c| !c.is_alphabetic()) {
+        return Err("Password must not be empty and must only contain alphabetic characters");
+    }
+
     let mut converted = String::new();
     let mut pass_index = 0;
     let pass_len = password.len();
@@ -30,9 +38,9 @@ pub fn mel_mdp(line: &str, password: &str, encrypt: bool) -> String {
             converted.push(shift_char(ch_no_accent, shift, encrypt));
             pass_index += 1;
         } else {
-            converted.push(ch_no_accent);
+            converted.push(ch);
         }
     }
 
-    converted
+    Ok(converted)
 }
