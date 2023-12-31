@@ -1,16 +1,25 @@
+// This module contains integration tests for the my_encryption_lib crate.
 #[cfg(test)]
 mod integration_tests {
+    // Importing the modules from the library to test.
     use my_encryption_lib::{mel_presets, mel_912, mel_mdp};
 
+    // Tests for the mel_1 function from mel_presets module.
     #[test]
     fn test_mel_1() {
+        // Encrypting "abc" with a shift of 1 should result in "bcd".
         assert_eq!(mel_presets::mel_1("abc", true).unwrap(), "bcd");
+        // Decrypting "bcd" with a shift of 1 should result in "abc".
         assert_eq!(mel_presets::mel_1("bcd", false).unwrap(), "abc");
+        // Testing accented characters and special symbols with mel_1.
         assert_eq!(mel_presets::mel_1("à mangé forêt !? ë", true).unwrap(), "b nbohf gpsfu !? f");
         assert_eq!(mel_presets::mel_1("b nbohf gpsfu !? f", false).unwrap(), "a mange foret !? e");
+        // Testing error handling for empty strings.
         assert!(mel_presets::mel_1("", true).is_err());
         assert!(mel_presets::mel_1("", false).is_err());
     }
+
+    // Similar tests are conducted for mel_2 to mel_25 functions, each using a different shift value.
 
     #[test]
     fn test_mel_2() {
@@ -252,16 +261,22 @@ mod integration_tests {
         assert!(mel_presets::mel_25("", false).is_err());
     }
 
+    // Tests for the mel_912 function from mel_912 module.
     #[test]
     fn test_mel_912() {
+        // Encrypting and decrypting a string with mel_912 and checking the results.
         assert_eq!(mel_912::mel_912("Héllo World!", true).unwrap(), "Qmsrt Arcvm!");
         assert_eq!(mel_912::mel_912("Qmsrt Arcvm!", false).unwrap(), "Hello World!");
+        // Testing error handling for empty strings with mel_912.
         assert!(mel_912::mel_912("", true).is_err());
     }
 
+    // Tests for the mel_mdp function from mel_mdp module.
     #[test]
     fn test_mel_mdp() {
+        // Encrypting "Hello World" with password "key" using mel_mdp.
         assert_eq!(mel_mdp::mel_mdp("Hello World", "key", true).unwrap(), "Rijvs Uyvjn");
+        // Testing error handling for empty strings and invalid passwords with mel_mdp.
         assert!(mel_mdp::mel_mdp("", "key", true).is_err());
         assert!(mel_mdp::mel_mdp("Hello World", "k3y", true).is_err());
     }
