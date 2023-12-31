@@ -9,9 +9,6 @@ license = "MIT"
 readme = "README.md"
 keywords = ["encryption", "security", "cryptography", "decryption", "rust"]
 categories = ["cryptography", "security-tools", "algorithms"]
-exclude = [
-    ".cargo_vcs_info.json"
-]
 
 [dependencies]
 
