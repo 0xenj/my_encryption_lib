@@ -1,6 +1,10 @@
 use crate::utils::replace_accented_char;
 
 fn shift_char(letter: char, shift: i32) -> char {
+    if !letter.is_alphabetic() {
+      return letter;
+    }
+
     let (start, end) = if letter.is_uppercase() { ('A', 'Z') } else { ('a', 'z') };
     let first_ascii = start as i32;
     let last_ascii = end as i32;
@@ -26,7 +30,11 @@ fn shift_char(letter: char, shift: i32) -> char {
     new_shift
 }
 
-pub fn mel_912(line: &str, encrypt: bool) -> String {
+pub fn mel_912(line: &str, encrypt: bool) -> Result<String, &'static str> {
+    if line.is_empty() {
+      return Err("Text must not be empty");
+    }
+
     let mut converted = String::new();
     let mut shift = if encrypt { 9 } else { -9 };
   
@@ -40,5 +48,5 @@ pub fn mel_912(line: &str, encrypt: bool) -> String {
       }
   }
   
-    converted
+    Ok(converted)
   }
